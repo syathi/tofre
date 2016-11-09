@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
   resources :lists
   resources :replies
-  resources :events
+  resources :events do
+    member {get "addition"}
+  end
+  
   devise_for :users
   root 'top#index'
   get 'top/show'

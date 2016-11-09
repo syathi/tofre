@@ -23,16 +23,7 @@ class Donut < ActiveRecord::Base
     end
   end
 
-  def check_image
-    if @image
-      if data.size > 512.kilobytes
-        errors.add(:image, :too_big_image)
-      end
-      unless IMAGE_TYPES.has_key?(content_type)
-        errors.add(:image, :invalid_image)
-      end
-    end
-  end
+
 
 
   class << self
@@ -45,3 +36,16 @@ class Donut < ActiveRecord::Base
     end
   end
 end
+
+  private
+
+  def check_image
+    if @image
+      if data.size > 512.kilobytes
+        errors.add(:image, :too_big_image)
+      end
+      unless IMAGE_TYPES.has_key?(content_type)
+        errors.add(:image, :invalid_image)
+      end
+    end
+  end

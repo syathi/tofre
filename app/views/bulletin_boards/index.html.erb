@@ -13,7 +13,7 @@
                 <p class="article">
                     <%= link_to '→', bulletin_boards_path(id: fridge.id) %>
                     <%= fridge.user.username %>の<%= fridge.name %>　期限:<%= fridge.deadline %>
-                    <% if @list = List.find_by(refrigerator_id: fridge.id, user_id: current_user.id) %>
+                    <% if @list = List.find_by(refrigerator_id: fridge.id, user_id: current_user.id, delete_flag: false) %>
                         <%= link_to '[♥︎]', list_path(@list), method: :delete %>
                     <% elsif fridge.user != current_user %>
                         <%= link_to '[♡]', lists_path(fid: fridge.id), method: :post %>
