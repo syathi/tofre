@@ -12,31 +12,31 @@
       <% if user_signed_in? %>
         <ul id="nav">
           <li><strong><%= link_to current_user.username+'さん', top_show_path %></strong></li>
-          <li><%= link_to 'プロフィール変更', edit_user_registration_path %></li>
+          <li><%= link_to '冷蔵庫', refrigerators_path %></li>
+          <li><%= link_to '掲示板', bulletin_boards_path %></li>
+          <li><%=link_to "レシピ", donuts_path %></li>
           <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete %></li>
-          <li><%=link_to "トップへ戻る", root_path %></li>
         </ul>
         <br />
       <% else %>
-        <ul id="nav">
-          <li><%= link_to '新規登録', new_user_registration_path %></li>
-          <li><%= link_to 'ログイン', new_user_session_path %></li>
-          <li><%=link_to "トップへ戻る", root_path %></li>
-        </ul>
+        <!--<ul id="nav">
+          <li><%= link_to 'ログインしろ' %></li>
+          <li><%= link_to 'ログインしろ' %></li>
+          <li><%= link_to 'ログインしろ' %></li>
+        </ul>-->
         <br />
       <% end %>
     </nav>
   </header>
 	<p class="notice"><%= notice %></p>
 	<p class="alert"><%= alert %></p>
-  <aside id="menu" >
-    
+  <!--<aside id="menu" >
     <ul>
       <li id="fridge" class="menuList"><%= link_to "冷蔵庫", refrigerators_path %></li>
       <li id="blltn"  class="menuList"><%= link_to "掲示板", bulletin_boards_path %></li>
       <li id="recipe" class="menuList"><%= link_to "レシピ", donuts_path %></li>
     </ul>
-  </aside>
+  </aside>-->
   <main id="contents" >
     <%= yield %>
   </main>	
