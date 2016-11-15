@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<img src="momen.jpg" width="3%"><font size="+3">食品管理</font><img src="kinu.jpg" width="5%">
+<img src="momen.jpg" width="3%"><font size="+3"><%= current_user.username %>さんの冷蔵庫</font><img src="kinu.jpg" width="5%"><br>
 <font size="+1"><%= link_to '中身追加', new_refrigerator_path%>｜<%= link_to '中身削除', refrigerators_path(dele: 1) %></font>
 
 

@@ -32,7 +32,7 @@ class RefrigeratorsController < ApplicationController
     @refrigerator.purchase = Date.today
     respond_to do |format|
       if @refrigerator.save
-        format.html { redirect_to @refrigerator, notice: 'Refrigerator was successfully created.' }
+        format.html { redirect_to @refrigerator, notice: '冷蔵庫に新しい食材が追加されました。' }
         format.json { render :show, status: :created, location: @refrigerator }
       else
         format.html { render :new }
@@ -47,7 +47,7 @@ class RefrigeratorsController < ApplicationController
     respond_to do |format|
       if @refrigerator.update(refrigerator_params)
         @refrigerator.update_attributes(deadline: nil) if params[:line]
-        format.html { redirect_to @refrigerator, notice: 'Refrigerator was successfully updated.' }
+        format.html { redirect_to @refrigerator, notice: '冷蔵庫の中身を更新しました。' }
         format.json { render :show, status: :ok, location: @refrigerator }
       else
         format.html { render :edit }
@@ -61,7 +61,7 @@ class RefrigeratorsController < ApplicationController
   def destroy
     @refrigerator.destroy
     respond_to do |format|
-      format.html { redirect_to refrigerators_url, notice: 'Refrigerator was successfully destroyed.' }
+      format.html { redirect_to refrigerators_url, notice: 'グッバイ食材。' }
       format.json { head :no_content }
     end
   end

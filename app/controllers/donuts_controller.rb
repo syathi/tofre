@@ -41,7 +41,7 @@ class DonutsController < ApplicationController
 
     respond_to do |format|
       if @donut.save
-        format.html { redirect_to @donut, notice: 'Donut was successfully created.' }
+        format.html { redirect_to @donut, notice: 'レシピの新規作成を完了しました。' }
         format.json { render :show, status: :created, location: @donut }
       else
         format.html { render :new }
@@ -55,7 +55,7 @@ class DonutsController < ApplicationController
   def update
     respond_to do |format|
       if @donut.update(donut_params)
-        format.html { redirect_to @donut, notice: 'Donut was successfully updated.' }
+        format.html { redirect_to @donut, notice: 'レシピの更新を完了しました。' }
         format.json { render :show, status: :ok, location: @donut }
       else
         format.html { render :edit }
@@ -69,7 +69,7 @@ class DonutsController < ApplicationController
   def destroy
     @donut.destroy
     respond_to do |format|
-      format.html { redirect_to donuts_url, notice: 'Donut was successfully destroyed.' }
+      format.html { redirect_to donuts_url, notice: 'レシピの削除が完了しました。' }
       format.json { head :no_content }
     end
   end
