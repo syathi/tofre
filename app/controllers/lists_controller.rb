@@ -11,7 +11,6 @@ class ListsController < ApplicationController
   # GET /lists/1.json
   def show
   end
-
   # GET /lists/new
   def new
     @list = List.new
@@ -25,7 +24,7 @@ class ListsController < ApplicationController
   # POST /lists.json
   def create
     @list = List.new(user_id: current_user.id, refrigerator_id: params[:fid])
-
+    binding.pry
     respond_to do |format|
       if @list.save
         format.html { redirect_to bulletin_boards_path, notice: 'List was successfully created.' }
