@@ -1,9 +1,7 @@
-
-
 <%= form_for(@donut) do |f| %>
   <% if @donut.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@donut.errors.count, "error") %> prohibited this donut from being saved:</h2>
+      <h2><%= pluralize(@donut.errors.count, "error") %> このレシピは保存出来ませんでした。:</h2>
 
       <ul>
       <% @donut.errors.full_messages.each do |message| %>
