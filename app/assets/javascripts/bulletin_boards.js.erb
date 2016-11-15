@@ -14,6 +14,7 @@ function set(){
         $(".heart").click(function() {
             var changeFav
             if($(this).children().eq(1).text() == 1){
+
                 changeFav = ajaxDelete($(this).children().eq(2).text())
                 changeFav.done(function(response){ console.log("delete done"); });
                 changeFav.fail(function(response){ console.log("delete error"); });
