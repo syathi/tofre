@@ -1,6 +1,6 @@
 /* 全体のフォント指定 */
 div.font-default {
-  font-family: monospace, 'Lucida Console', 'ヒラギノ角ゴ ProN W8';
+  font-family: 'Lucida Console', 'ヒラギノ角ゴ ProN W8';
 }
 
 /*とうふれロゴ背景*/
@@ -11,9 +11,41 @@ body{
   background-position: -30pt 50pt;
 }
 
-/*ヘッダ*/
+/* メニューモーダル化 */
+#modal-content{
+  display:none;
+  width:50%;
+  margin:1.5em auto 0;
+  padding:10px 20px;
+  border:2px solid #aaa;
+  background:#fff;
+  z-index:2;
+  position:fixed;
+}
 
-header{
+.modal-p{
+  margin-top:1em;
+}
+
+.modal-p:first-child{
+  margin-top:0;
+}
+
+.button-link{
+  color:#00f;
+  text-decoration:underline;
+}
+ 
+.button-link:hover{
+  cursor:pointer;
+  color:#f00;
+}
+
+/* ヘッダ2 */
+
+
+/* ヘッダ */
+/*header {
   font-family: monospace, 'Lucida Console', 'ヒラギノ角ゴ Std W8';
 	padding: 0px;
 	margin: 0px 0px 0px 0px;
@@ -25,7 +57,7 @@ header ul{
 header li{
 	margin-right: 30px; 
 	text-align:right;
-}
+}*/
 
 /*メニュー*/
 aside{

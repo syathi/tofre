@@ -37,7 +37,12 @@
     <%= f.file_field :image ,:id =>"0", :onchange => "change();" %>
 
   </div>
+
   <div class="actions">
-    <%= f.submit %>
+    <% if current_page?(new_donut_path) %>
+      <%= f.submit "新規作成"%>
+    <% else %>
+      <%= f.submit "レシピの更新"%>
+    <% end %>
   </div>
 <% end %>

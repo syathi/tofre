@@ -34,6 +34,10 @@
     <%= f.number_field :lower_num %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <% if current_page?(new_event_path) %>
+      <%= f.submit "新規作成"%>
+    <% else %>
+      <%= f.submit "イベントの更新"%>
+    <% end %>
   </div>
 <% end %>
