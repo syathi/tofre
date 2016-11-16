@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  before_action :set_event, only: [:show, :edit, :update, :destroy]
+  before_action :set_event, only: [:show, :edit, :update, :destroy, :addition]
 
   # GET /events
   # GET /events.json
@@ -10,6 +10,7 @@ class EventsController < ApplicationController
   # GET /events/1
   # GET /events/1.json
   def show
+    @myrefri = Refrigerator.where(user_id: current_user.id).where(event_id: nil)
   end
 
   # GET /events/new
@@ -20,6 +21,7 @@ class EventsController < ApplicationController
 
   # GET /events/1/edit
   def edit
+    @myrefri = Refrigerator.where(user_id: current_user.id).where(event_id: [nil, @event.id])
   end
 
   # POST /events
@@ -27,14 +29,13 @@ class EventsController < ApplicationController
   def create
     @event = Event.new(event_params)
 
-
     respond_to do |format|
       if @event.save
         params[:refri][:id].each do |refrigerator_id|
           @refrigerator = Refrigerator.find(refrigerator_id)
           @refrigerator.update_attributes(event_id: @event.id)
         end
-        format.html { redirect_to @event, notice: '新しいイベントを作成しました。' }
+        format.html { redirect_to @event, notice: 'レシピの新規作成を完了しました。' }
         format.json { render :show, status: :created, location: @event }
       else
         format.html { render :new }
@@ -48,7 +49,7 @@ class EventsController < ApplicationController
   def update
     respond_to do |format|
       if @event.update(event_params)
-        format.html { redirect_to @event, notice: 'イベントを更新しました。' }
+        format.html { redirect_to @event, notice: 'レシピの更新を完了しました。' }
         format.json { render :show, status: :ok, location: @event }
       else
         format.html { render :edit }
@@ -62,9 +63,20 @@ class EventsController < ApplicationController
   def destroy
     @event.destroy
     respond_to do |format|
-      format.html { redirect_to events_url, notice: 'イベントを削除しました。' }
+      format.html { redirect_to events_url, notice: 'レシピの削除が完了しました。' }
       format.json { head :no_content }
     end
+  end
+
+
+  def addition
+    @refrigerator = Refrigerator.find(params[:refri])
+    if params[:dele]
+      @refrigerator.update_attributes(event_id: nil)
+    else
+      @refrigerator.update_attributes(event_id: @event.id)
+    end
+    redirect_to action: "show"
   end
 
   private

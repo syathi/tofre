@@ -24,12 +24,17 @@ class ListsController < ApplicationController
   # POST /lists
   # POST /lists.json
   def create
-    @list = List.new(user_id: current_user.id, refrigerator_id: params[:fid])
+    @list = List.new(user_id: current_user.id, refrigerator_id: params[:fid], event_id: params[:eid], delete_flag: false)
 
     respond_to do |format|
       if @list.save
-        format.html { redirect_to bulletin_boards_path, notice: 'リストを新規作成しました。' }
-        format.json { render bulletin_boards_path, status: :created, location: @list }
+        if @list.refrigerator_id
+          format.html { redirect_to bulletin_boards_path, notice: 'List was successfully created.' }
+          format.json { render bulletin_boards_path, status: :created, location: @list }
+        else
+          format.html { redirect_to events_path, notice: 'List was successfully created.' }
+          format.json { render events_path, status: :created, location: @list }
+        end
       else
         format.html { render :new }
         format.json { render json: @list.errors, status: :unprocessable_entity }
@@ -42,7 +47,7 @@ class ListsController < ApplicationController
   def update
     respond_to do |format|
       if @list.update(list_params)
-        format.html { redirect_to @list, notice: 'リストを更新しました。' }
+        format.html { redirect_to @list, notice: 'List was successfully updated.' }
         format.json { render :show, status: :ok, location: @list }
       else
         format.html { render :edit }
@@ -54,10 +59,11 @@ class ListsController < ApplicationController
   # DELETE /lists/1
   # DELETE /lists/1.json
   def destroy
-    @list.destroy
-    respond_to do |format|
-      format.html { redirect_to bulletin_boards_path, notice: 'リストを削除しました。' }
-      format.json { head :no_content }
+    @list.update_attributes(delete_flag: true)
+    if @list.event_id
+      redirect_to events_path
+    else
+      redirect_to bulletin_boards_path
     end
   end
 
@@ -69,6 +75,6 @@ class ListsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def list_params
-      params.require(:list).permit(:refrigerator_id, :user_id, :event_id)
+      params.require(:list).permit(:refrigerator_id, :user_id, :event_id, :delete_flag)
     end
 end
